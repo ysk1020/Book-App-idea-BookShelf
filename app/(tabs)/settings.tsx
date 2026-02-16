@@ -1,7 +1,8 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import React from 'react';
-import { StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { Switch, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+// import "../global.css";
 
 // types
 type SettingItemType = 'link' | 'toggle';
@@ -128,14 +129,14 @@ function SettingRow({ item, children }: SettingRowProps) {
 
   return (
     <TouchableOpacity activeOpacity={item.type === 'link' ? 0.7 : 1}>
-      <View style={styles.row}>
-        <View style={[styles.rowIcon, { backgroundColor: item.color }]}> 
+      <View className="flex-row items-center py-4 px-4">
+        <View className="w-8 h-8 rounded-full items-center justify-center mr-3" style={{ backgroundColor: item.color }}> 
           <MaterialIcons name={item.icon as any} size={20} color="#fff" />
         </View>
 
-        <Text style={styles.rowLabel}>{item.label}</Text>
+        <Text className="flex-1 text-white text-base">{item.label}</Text>
 
-        <View style={styles.rowRight}>
+        <View className="ml-3 items-end justify-center">
           {item.type === 'link' ? (
             <MaterialIcons name="chevron-right" size={24} color="#8e8d91" />
           ) : (
@@ -152,7 +153,7 @@ function SettingRow({ item, children }: SettingRowProps) {
 export default function SettingsScreen() {
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView className="flex-1">
       {/* <ScrollView style={ styles.contentContainer }> */}
         {/* <TouchableOpacity>
           <View>
@@ -169,88 +170,23 @@ export default function SettingsScreen() {
         </View> */}
         {/* Sections */}
         {SECTIONS.map((section) => (
-          <View key={section.header} style={ styles.section }>
-            <Text style={styles.sectionHeader}> {section.header}</Text>
-            
-            <View style={styles.sectionCard}>
-              {section.items.map((item,idx)=>(
-                <View key={item.id ?? item.label}>
-                  <SettingRow item={item}>
-                    {idx!== section.items.length -1 && <View style={styles.divider} />}
-                  </SettingRow>
-                </View>
-              ))}
+            <View key={section.header} className="mt-6 px-4">
+              <Text className="text-[#8e8d91] text-[13px] mb-2.5"> {section.header}</Text>
+
+              <View className="bg-[#1a1a1c] rounded-xl overflow-hidden">
+                {section.items.map((item,idx)=>(
+                  <View key={item.id ?? item.label}>
+                    <SettingRow item={item}>
+                      {idx!== section.items.length -1 && <View className="h-[1px] bg-[#2a2a2e] ml-[60px]" />}
+                    </SettingRow>
+                  </View>
+                ))}
+              </View>
             </View>
-          </View>
-        ))}
+          ))}
       {/* </ScrollView> */}
     </SafeAreaView>
   )
 }
 
-const styles =  StyleSheet.create({
-  contentContainer:{
-    paddingVertical:24,   
-  },
-  profile: {
-    padding:24,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  profileImage: {
-    width: 80, 
-    height: 80, 
-    borderRadius: 40, 
-    backgroundColor: '#808080'
-  },
-  profileName: {
-    marginTop: 12,
-    fontSize: 18, 
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-  section: {
-  marginTop: 24,
-  paddingHorizontal: 16,
-},
-sectionHeader: {
-  color: '#8e8d91',
-  fontSize: 13,
-  marginBottom: 10,
-},
-sectionCard: {
-  backgroundColor: '#1a1a1c',
-  borderRadius: 12,
-  overflow: 'hidden',
-},
-row: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  paddingVertical: 16,
-  paddingHorizontal: 16,
-},
-rowIcon: {
-  width: 32,
-  height: 32,
-  borderRadius: 16,
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginRight: 12,
-},
-rowLabel: {
-  flex: 1,
-  color: '#fff',
-  fontSize: 16,
-},
-rowRight: {
-  marginLeft: 12,
-  alignItems: 'flex-end',
-  justifyContent: 'center',
-},
-divider: {
-  height: StyleSheet.hairlineWidth,
-  backgroundColor: '#2a2a2e',
-  marginLeft: 60, // aligns divider after icon
-},
-
-});
+// styles are handled via Tailwind classes (nativewind)
