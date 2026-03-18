@@ -1,8 +1,7 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import React from 'react';
-import { Switch, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-// import "../global.css";
 
 // types
 type SettingItemType = 'link' | 'toggle';
@@ -153,8 +152,8 @@ function SettingRow({ item, children }: SettingRowProps) {
 export default function SettingsScreen() {
 
   return (
-    <SafeAreaView className="flex-1">
-      {/* <ScrollView style={ styles.contentContainer }> */}
+      <SafeAreaView className="flex-1 bg-[#121214]">
+      <ScrollView className="flex-1 bg-[#121214]">
         {/* <TouchableOpacity>
           <View>
             <TouchableOpacity>
@@ -184,8 +183,8 @@ export default function SettingsScreen() {
               </View>
             </View>
           ))}
-      {/* </ScrollView> */}
-    </SafeAreaView>
+      </ScrollView>
+      </SafeAreaView>
   )
 }
 
